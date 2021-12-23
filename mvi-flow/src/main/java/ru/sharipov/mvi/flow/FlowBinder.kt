@@ -26,7 +26,7 @@ interface FlowBinder {
             }.catch {
                 Log.e(TAG, it.message, it)
                 throw it
-            }
+            }.shareIn(this, SharingStarted.Eagerly)
         this@bind.launch {
             middleware.transform(eventFlow)
                 .collect { transformedEvent: T ->

@@ -11,7 +11,7 @@ sealed class SimpleEvent: Event {
 
     object StartLoadingClick : SimpleEvent()
 
-    class RequestEvent(val request: RequestState): SimpleEvent()
+    data class RequestEvent(val request: RequestState): SimpleEvent()
 
     data class TitleUpdate(val title: String): SimpleEvent()
 }
