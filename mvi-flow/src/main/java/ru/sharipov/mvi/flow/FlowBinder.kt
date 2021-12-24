@@ -15,7 +15,7 @@ interface FlowBinder {
 
     fun <T : Event, SH> CoroutineScope.bind(
         eventHub: FlowEventHub<T>,
-        middleware: Middleware<T, Flow<T>, Flow<T>>,
+        middleware: Middleware<Flow<T>, Flow<T>>,
         stateHolder: SH,
         reactor: Reactor<T, SH>
     ) {
