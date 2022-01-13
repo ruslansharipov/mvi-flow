@@ -9,14 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mviflow">
+
         <activity
-            android:name=".simple.SimpleActivity"
-            android:exported="true">
+            android:name=".compose.ComposeActivityView"
+            android:exported="true"
+            android:label="@string/title_activity_compose_view"
+            android:theme="@style/Theme.Mviflow.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".simple.SimpleActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

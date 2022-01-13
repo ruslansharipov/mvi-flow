@@ -31,16 +31,18 @@ interface MVIView<S: Any, E : Event> {
     val viewModel: MviViewModel<S, E>
 
     /**
-     * Emits [event] to a hub which is provided by [viewModel]
+     * Emits this event to a hub which is provided by [viewModel]
      */
-    fun emit(event: E) {
+    fun E.emit() {
         uiScope.launch {
-            viewModel.hub.emit(event)
+            viewModel.hub.emit(this@emit)
         }
     }
 
     /**
      * Subscribes to state updates with the [collector]
+     *
+     * TODO consider making this function @Composable
      */
     fun observeState(collector: suspend (S) -> Unit) {
         uiScope.launch(Dispatchers.Main) {

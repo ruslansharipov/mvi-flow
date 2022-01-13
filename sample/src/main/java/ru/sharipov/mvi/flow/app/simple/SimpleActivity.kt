@@ -27,12 +27,12 @@ class SimpleActivity : AppCompatActivity(), MviAndroidView<SimpleState, SimpleEv
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
         val loadingBtn = findViewById<Button>(R.id.loading_btn)
 
-        loadingBtn.setOnClickListener { emit(SimpleEvent.StartLoadingClick) }
+        loadingBtn.setOnClickListener { SimpleEvent.StartLoadingClick.emit() }
 
-        incrementBtn.setOnClickListener { emit(SimpleEvent.IncrementClick) }
-        decrementBtn.setOnClickListener { emit(SimpleEvent.DecrementClick) }
+        incrementBtn.setOnClickListener { SimpleEvent.IncrementClick.emit() }
+        decrementBtn.setOnClickListener { SimpleEvent.DecrementClick.emit() }
 
-        clickMeBtn.setOnClickListener { emit(SimpleEvent.SimpleClick) }
+        clickMeBtn.setOnClickListener { SimpleEvent.SimpleClick.emit() }
 
         observeState { state: SimpleState ->
             counterTv?.text = state.counter.toString()
