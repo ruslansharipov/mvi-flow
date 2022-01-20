@@ -1,9 +1,8 @@
 package ru.sharipov.mvi.core.middleware
 
-import ru.sharipov.mvi.core.event.Event
 
-interface DslMiddleware<T : Event, InputStream, OutputStream, TransformList : List<OutputStream>> :
-    Middleware<T, InputStream, OutputStream> {
+interface DslMiddleware<InputStream, OutputStream, TransformList : List<OutputStream>> :
+    Middleware<InputStream, OutputStream> {
 
     fun provideTransformationList(eventStream: InputStream): TransformList
 

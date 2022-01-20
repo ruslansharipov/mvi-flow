@@ -7,9 +7,9 @@ import ru.sharipov.mvi.core.event.Event
 import ru.sharipov.mvi.core.middleware.DslMiddleware
 
 /**
- * [Middleware] with Flow and DSL support with [EventTransformerList].
+ * Transforms Flow streams using the transformations described in the [EventTransformerList].
  */
-interface DslFlowMiddleware<T : Event> : DslMiddleware<T, Flow<T>, Flow<T>, EventTransformerList<T>> {
+interface DslFlowMiddleware<T : Event> : DslMiddleware<Flow<T>, Flow<T>, EventTransformerList<T>> {
 
     override fun provideTransformationList(eventStream: Flow<T>): EventTransformerList<T> {
         return EventTransformerList(eventStream)

@@ -9,11 +9,10 @@ import ru.sharipov.mvi.core.event.Event
  * Is used to transform UI events into service layer events.
  * For example for starting network request after pressing UI button.
  *
- * @param T             event type
  * @param InputStream   type of income stream
  * @param OutputStream  type of outcome stream
  */
-interface Middleware<T : Event, InputStream, OutputStream> {
+interface Middleware<InputStream, OutputStream> {
 
     fun transform(eventStream: InputStream): OutputStream
 }
