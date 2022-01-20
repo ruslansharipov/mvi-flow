@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.sharipov.mvi.core.event.Event
-import ru.sharipov.mvi.flow.MviViewModel
 
 /**
  * Android object with lifecycle that can emit events to a screens hub and observe state changes
