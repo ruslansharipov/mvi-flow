@@ -59,5 +59,5 @@ android {
 
 dependencies {
     api(project(":mvi-core"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }

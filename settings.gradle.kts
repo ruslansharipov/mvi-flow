@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mvi-flow"
+rootProject.name = "surf-mvi-flow"
 include(":mvi-core")
 include(":mvi-flow")
 include(":mvi-flow-lifecycle")

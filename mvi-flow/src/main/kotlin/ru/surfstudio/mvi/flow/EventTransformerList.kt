@@ -15,6 +15,7 @@
  */
 package ru.surfstudio.mvi.flow
 
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import ru.surfstudio.mvi.core.event.Event
 import kotlin.reflect.KClass
@@ -135,6 +136,7 @@ open class EventTransformerList<E : Event>(
      *
      * @param mapper mapper function.
      */
+    @OptIn(FlowPreview::class)
     infix fun <T : Event> Flow<T>.eventMap(
             mapper: (T) -> Flow<E>
     ): Flow<E> {
