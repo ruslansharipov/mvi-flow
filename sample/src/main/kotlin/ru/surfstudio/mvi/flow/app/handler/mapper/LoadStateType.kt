@@ -1,4 +1,4 @@
-package ru.surfstudio.mvi.flow.app.mapper
+package ru.surfstudio.mvi.flow.app.handler.mapper
 
 import ru.surfstudio.mvi.mappers.Loading
 

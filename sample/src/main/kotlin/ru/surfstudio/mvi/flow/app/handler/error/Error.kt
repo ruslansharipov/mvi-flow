@@ -1,4 +1,4 @@
-package ru.surfstudio.mvi.flow.app.error
+package ru.surfstudio.mvi.flow.app.handler.error
 
 /** Sample exception for no internet state */
 class NoInternetException : RuntimeException()
