@@ -4,7 +4,7 @@ Surf MVI Library based on Kotlin Flow
 
 ## Connection
 
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fartifactory.surfstudio.ru%2Fartifactory%2Flibs-release-local%2Fru%2Fsurfstudio%mvi%2Fmvi-core%2Fmaven-metadata.xml)
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fartifactory.surfstudio.ru%2Fartifactory%2Flibs-release-local%2Fru%2Fsurfstudio%2Fmvi%2Fmvi-core%2Fmaven-metadata.xml)
 
 ```gradle
 repositories {
