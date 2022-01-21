@@ -15,7 +15,7 @@ publishing {
             version = libVersion
             groupId = libGroup
             artifactId = project.name
-            artifact("$buildDir/outputs/aar/mvi-flow-lifecycle-$libVersion-release.aar")
+            artifact("$buildDir/outputs/aar/mvi-mappers-$libVersion-release.aar")
         }
     }
 }
@@ -42,7 +42,7 @@ android {
     defaultConfig {
         minSdk = 23
         targetSdk = 31
-        setProperty("archivesBaseName", "mvi-flow-lifecycle-$libVersion")
+        setProperty("archivesBaseName", "mvi-mappers-$libVersion")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -58,8 +58,6 @@ android {
 }
 
 dependencies {
-    api(project(":mvi-flow"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation(project(":mvi-flow-lifecycle"))
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
 }
