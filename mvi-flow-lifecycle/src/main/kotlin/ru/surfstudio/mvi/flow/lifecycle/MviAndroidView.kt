@@ -20,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import ru.surfstudio.mvi.core.event.Event
 
@@ -62,7 +61,7 @@ interface MVIView<S : Any, E : Event> {
         uiScope.launch(Dispatchers.Main) {
             viewModel.state
                 .observeState()
-                .collect(FlowCollector { collector(it) })
+                .collect { collector(it) }
         }
     }
 }
