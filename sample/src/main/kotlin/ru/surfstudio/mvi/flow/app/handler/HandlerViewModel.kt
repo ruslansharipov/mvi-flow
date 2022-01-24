@@ -30,6 +30,6 @@ class HandlerViewModel : MviErrorHandlerViewModel<HandlerState, HandlerEvent>() 
     override val reducer: HandlerReducer = HandlerReducer(ErrorHandlerImpl())
 
     init {
-        init()
+        bindFlow()
     }
 }

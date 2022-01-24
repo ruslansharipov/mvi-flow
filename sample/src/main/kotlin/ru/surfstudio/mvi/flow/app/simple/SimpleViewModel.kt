@@ -27,6 +27,6 @@ class SimpleViewModel : MviViewModel<SimpleState, SimpleEvent>() {
     override val reducer: SimpleReducer = SimpleReducer()
 
     init {
-        init()
+        bindFlow()
     }
 }
