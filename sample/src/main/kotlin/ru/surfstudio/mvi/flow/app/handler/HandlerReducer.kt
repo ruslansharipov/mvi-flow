@@ -15,13 +15,21 @@
  */
 package ru.surfstudio.mvi.flow.app.handler
 
+import ru.surfstudio.mvi.flow.app.handler.mapper.LoadStateType
+import ru.surfstudio.mvi.flow.app.handler.mapper.RequestMappers
 import ru.surfstudio.mvi.flow.app.request.RequestState
+import ru.surfstudio.mvi.mappers.RequestEvent
+import ru.surfstudio.mvi.mappers.RequestMapper
+import ru.surfstudio.mvi.mappers.RequestUi
 import ru.surfstudio.mvi.mappers.handler.ErrorHandler
 import ru.surfstudio.mvi.mappers.handler.ErrorHandlerReducer
 
 data class HandlerState(
-    val request: RequestState = RequestState.None
-)
+    val request: RequestState = RequestState.None,
+    val dataRequestUi: RequestUi<Unit> = RequestUi()
+) {
+    val loadState: LoadStateType = dataRequestUi.load as? LoadStateType ?: LoadStateType.None
+}
 
 class HandlerReducer(
     override val errorHandler: ErrorHandler
@@ -29,7 +37,22 @@ class HandlerReducer(
 
     override fun reduce(state: HandlerState, event: HandlerEvent): HandlerState {
         return when (event) {
+            is HandlerEvent.LoadDataRequest -> state.copy(
+                dataRequestUi = updateRequestUi(event, state.dataRequestUi)
+            )
             else -> state
         }
+    }
+
+    private fun <T : Any> updateRequestUi(
+        event: RequestEvent<T>,
+        requestUi: RequestUi<T>
+    ): RequestUi<T> {
+        return RequestMapper
+            .builder(event.request, requestUi)
+            .mapData(RequestMappers.data.default())
+            .mapLoading(RequestMappers.loading.default())
+            .handleError(RequestMappers.error.loadingBased(errorHandler))
+            .build()
     }
 }

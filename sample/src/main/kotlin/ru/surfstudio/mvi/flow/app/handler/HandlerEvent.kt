@@ -16,9 +16,14 @@
 package ru.surfstudio.mvi.flow.app.handler
 
 import ru.surfstudio.mvi.core.event.Event
-import ru.surfstudio.mvi.flow.app.request.RequestState
+import ru.surfstudio.mvi.mappers.Request
+import ru.surfstudio.mvi.mappers.RequestEvent
 
 sealed class HandlerEvent : Event {
     object StartLoading : HandlerEvent()
     object OnBackPressed : HandlerEvent()
+
+    data class LoadDataRequest(
+        override val request: Request<Unit>
+    ) : RequestEvent<Unit>, HandlerEvent()
 }

@@ -15,9 +15,7 @@
  */
 package ru.surfstudio.mvi.flow.app.simple
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import ru.surfstudio.mvi.flow.FlowState
 import ru.surfstudio.mvi.flow.app.request.RequestState
@@ -62,6 +60,5 @@ class SimpleMiddleware(
                     emit(SimpleEvent.RequestEvent(RequestState.None))
                 }
             }
-
     }
 }

@@ -25,8 +25,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":mvi-flow"))
-    implementation(project(":mvi-flow-lifecycle"))
     implementation(project(":mvi-mappers"))
 
     implementation("androidx.core:core-ktx:1.7.0")

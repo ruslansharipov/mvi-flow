@@ -16,17 +16,24 @@
 package ru.surfstudio.mvi.flow.app.handler
 
 import kotlinx.coroutines.flow.Flow
-import ru.surfstudio.mvi.flow.DslFlowMiddleware
+import kotlinx.coroutines.flow.flowOf
 import ru.surfstudio.mvi.flow.FlowState
+import ru.surfstudio.mvi.flow.app.handler.HandlerEvent.*
+import ru.surfstudio.mvi.mappers.MapperFlowMiddleware
 
 class HandlerMiddleware(
     private val state: FlowState<HandlerState>
-) : DslFlowMiddleware<HandlerEvent> {
+) : MapperFlowMiddleware<HandlerEvent> {
 
     override fun transform(eventStream: Flow<HandlerEvent>): Flow<HandlerEvent> {
         return eventStream.transformations {
-
+            addAll(
+                loadData()
+            )
         }
     }
 
+    private fun loadData(): Flow<HandlerEvent> =
+        flowOf(Unit) //todo
+            .asIoRequestEvent(::LoadDataRequest)
 }
