@@ -15,25 +15,21 @@
  */
 package ru.surfstudio.mvi.flow.app.handler
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.surfstudio.mvi.flow.FlowEventHub
 import ru.surfstudio.mvi.flow.FlowState
 import ru.surfstudio.mvi.flow.app.handler.error.ErrorHandlerImpl
+import ru.surfstudio.mvi.flow.app.network.IpNetworkCreator
 import ru.surfstudio.mvi.mappers.handler.MviErrorHandlerViewModel
 
 class HandlerViewModel : MviErrorHandlerViewModel<HandlerState, HandlerEvent>() {
 
     override val state: FlowState<HandlerState> = FlowState(HandlerState())
     override val hub: FlowEventHub<HandlerEvent> = FlowEventHub()
-    override val middleware: HandlerMiddleware = HandlerMiddleware(state)
+    override val middleware: HandlerMiddleware =
+        HandlerMiddleware(IpNetworkCreator.repository)
     override val reducer: HandlerReducer = HandlerReducer(ErrorHandlerImpl())
 
     init {
         init()
-        // start loading on screen creation when the viewModel is ready
-        viewModelScope.launch {
-            hub.emit(HandlerEvent.StartLoading)
-        }
     }
 }

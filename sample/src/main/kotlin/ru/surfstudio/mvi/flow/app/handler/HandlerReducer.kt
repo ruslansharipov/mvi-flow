@@ -17,7 +17,6 @@ package ru.surfstudio.mvi.flow.app.handler
 
 import ru.surfstudio.mvi.flow.app.handler.mapper.LoadStateType
 import ru.surfstudio.mvi.flow.app.handler.mapper.RequestMappers
-import ru.surfstudio.mvi.flow.app.request.RequestState
 import ru.surfstudio.mvi.mappers.RequestEvent
 import ru.surfstudio.mvi.mappers.RequestMapper
 import ru.surfstudio.mvi.mappers.RequestUi
@@ -25,10 +24,10 @@ import ru.surfstudio.mvi.mappers.handler.ErrorHandler
 import ru.surfstudio.mvi.mappers.handler.ErrorHandlerReducer
 
 data class HandlerState(
-    val request: RequestState = RequestState.None,
-    val dataRequestUi: RequestUi<Unit> = RequestUi()
+    val dataRequestUi: RequestUi<String> = RequestUi()
 ) {
-    val loadState: LoadStateType = dataRequestUi.load as? LoadStateType ?: LoadStateType.None
+    val loadState: LoadStateType = dataRequestUi.load as? LoadStateType ?: LoadStateType.Main
+    val data: String = dataRequestUi.data.orEmpty()
 }
 
 class HandlerReducer(

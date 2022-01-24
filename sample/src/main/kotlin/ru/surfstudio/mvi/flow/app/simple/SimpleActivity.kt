@@ -25,7 +25,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import ru.surfstudio.mvi.flow.app.R
 import ru.surfstudio.mvi.flow.app.handler.HandlerActivity
-import ru.surfstudio.mvi.flow.app.request.RequestState
+import ru.surfstudio.mvi.flow.app.simple.request.RequestState
 import ru.surfstudio.mvi.flow.lifecycle.MviAndroidView
 
 class SimpleActivity : AppCompatActivity(), MviAndroidView<SimpleState, SimpleEvent> {

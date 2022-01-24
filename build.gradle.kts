@@ -11,6 +11,7 @@ buildscript {
 
 plugins {
     id("com.diffplug.spotless")
+    kotlin("plugin.serialization") version "1.6.10"
 }
 
 subprojects {

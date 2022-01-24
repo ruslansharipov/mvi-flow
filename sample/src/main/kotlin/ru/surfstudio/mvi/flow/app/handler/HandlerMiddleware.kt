@@ -17,23 +17,25 @@ package ru.surfstudio.mvi.flow.app.handler
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import ru.surfstudio.mvi.flow.FlowState
-import ru.surfstudio.mvi.flow.app.handler.HandlerEvent.*
+import ru.surfstudio.mvi.flow.app.handler.HandlerEvent.LoadDataRequest
+import ru.surfstudio.mvi.flow.app.network.IpRepository
 import ru.surfstudio.mvi.mappers.MapperFlowMiddleware
 
 class HandlerMiddleware(
-    private val state: FlowState<HandlerState>
+    private val repository: IpRepository
 ) : MapperFlowMiddleware<HandlerEvent> {
 
     override fun transform(eventStream: Flow<HandlerEvent>): Flow<HandlerEvent> {
         return eventStream.transformations {
             addAll(
-                loadData()
+                // init loading
+                flowOf(HandlerEvent.StartLoading),
+                HandlerEvent.StartLoading::class eventMapTo { loadData() }
             )
         }
     }
 
     private fun loadData(): Flow<HandlerEvent> =
-        flowOf(Unit) //todo
-            .asIoRequestEvent(::LoadDataRequest)
+        repository.getIpCountry()
+            .asRequestEvent(::LoadDataRequest)
 }

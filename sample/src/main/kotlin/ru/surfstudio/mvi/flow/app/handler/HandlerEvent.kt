@@ -24,6 +24,6 @@ sealed class HandlerEvent : Event {
     object OnBackPressed : HandlerEvent()
 
     data class LoadDataRequest(
-        override val request: Request<Unit>
-    ) : RequestEvent<Unit>, HandlerEvent()
+        override val request: Request<String>
+    ) : RequestEvent<String>, HandlerEvent()
 }

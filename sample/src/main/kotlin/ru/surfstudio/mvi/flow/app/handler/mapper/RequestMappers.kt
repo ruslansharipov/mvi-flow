@@ -158,7 +158,6 @@ object RequestMappers {
                 request.isLoading && hasData -> LoadStateType.TransparentLoading
                 request.isError && hasData -> LoadStateType.TransparentLoading
                 request.isLoading && !hasData -> LoadStateType.Main
-                request.isError && !hasData -> LoadStateType.Main
                 request.isError && !hasData -> {
                     if (request.getError() is NoInternetException) {
                         LoadStateType.NoInternet

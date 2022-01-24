@@ -32,8 +32,6 @@ interface MviErrorHandlerAndroidView<S : Any, E : Event> : MVIErrorHandlerView<S
         get() = lifecycleScope
 }
 
-//todo fix base interface, remove duplicates
-
 interface MVIErrorHandlerView<S : Any, E : Event> {
 
     /**

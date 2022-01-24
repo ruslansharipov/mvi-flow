@@ -10,17 +10,6 @@ import kotlinx.coroutines.flow.*
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 fun <T> Flow<T>.asRequest(): Flow<Request<T>> = this
-    .map { Request.Success(it) }
-    .onStart { Request.Loading<T>() }
-    .catch { Request.Error<T>(it) }
-    /* todo check implementation
-    .flatMapLatest {
-        flow<Request<T>> {
-            Request.Success(it)
-        }.onStart {
-            Request.Loading<T>()
-        }.catch {
-            Request.Error<T>(it)
-        }
-    }
-    */
+    .map { Request.Success(it) as Request<T> }
+    .onStart { emit(Request.Loading()) }
+    .catch { emit(Request.Error(it)) }

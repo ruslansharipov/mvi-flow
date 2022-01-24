@@ -24,7 +24,7 @@ class HandlerActivity : AppCompatActivity(),
                 LoadStateType.Error -> "Error"
                 LoadStateType.Main -> "Main loading"
                 LoadStateType.NoInternet -> "No internet"
-                LoadStateType.None -> "Get content"
+                LoadStateType.None -> state.data
                 LoadStateType.SwipeRefreshLoading -> "Swipe refresh"
                 LoadStateType.TransparentLoading -> "Transparent loading"
             }
