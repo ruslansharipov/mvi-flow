@@ -51,7 +51,7 @@ class HandlerReducer(
             .builder(event.request, requestUi)
             .mapData(RequestMappers.data.default())
             .mapLoading(RequestMappers.loading.default())
-            .handleError(RequestMappers.error.loadingBased(errorHandler))
+            .handleError(RequestMappers.error.forced(errorHandler))
             .build()
     }
 }
