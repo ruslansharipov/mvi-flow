@@ -178,7 +178,7 @@ open class EventTransformerList<E : Event>(
      * For example, when we need to add debounce and distinctUntilChanged on TextChanged event before sending it to network.
      * @param mapper mapper function.
      */
-    fun <T : Event> Flow<T>.streamMap(
+    infix fun <T : Event> Flow<T>.streamMap(
             mapper: (Flow<T>) -> Flow<E>
     ): Flow<E> {
         return mapper(this)
@@ -212,10 +212,15 @@ open class EventTransformerList<E : Event>(
         return eventStream.filterIsInstance<T>().streamMap(mapper)
     }
 
+    /**
+     * Filters events by a given [filterCondition].
+     */
+    inline infix fun <reified T : Event> KClass<T>.filter(crossinline filterCondition: (T) -> Boolean): Flow<T> {
+        return eventStream.filterIsInstance<T>().filter(filterCondition)
+    }
 
     /**
-     * TODO DSL
-     * 1. Filter events by a given condition
-     * 2. Decompose events filtered by type, to process them in another middleware.
+     * Roadmap
+     * 1. Decompose events filtered by type, to process them in another middleware.
      */
 }
