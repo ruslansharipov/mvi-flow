@@ -29,8 +29,8 @@ class SimpleMiddleware(
     override fun transform(eventStream: Flow<SimpleEvent>): Flow<SimpleEvent> {
         return eventStream.transformations {
             addAll(
-                SimpleEvent.StartLoadingClick::class streamMapTo { requestFlow(it) },
-                SimpleEvent.SimpleClick::class streamMapTo { clicks -> clicksFlow(clicks) }
+                SimpleEvent.StartLoadingClick::class filter { state.currentState.request == RequestState.None } streamMap { requestFlow(it) },
+                SimpleEvent.SimpleClick::class streamMapTo { clicks -> clicksFlow(clicks) },
             )
         }
     }
@@ -43,8 +43,7 @@ class SimpleMiddleware(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun requestFlow(flow: Flow<SimpleEvent.StartLoadingClick>): Flow<SimpleEvent.RequestEvent> {
-        return flow.filter { state.currentState.request == RequestState.None }
-            .flatMapLatest {
+        return flow.flatMapLatest {
                 flow {
                     delay(3000)
                     if (System.currentTimeMillis() % 2 == 0L) {
