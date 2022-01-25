@@ -39,7 +39,7 @@ allprojects {
                     version = libVersion
                     groupId = libGroup
                     artifactId = name
-                    artifact("$buildDir/outputs/aar/$name-$libVersion-release.aar")
+                    artifact("$buildDir/outputs/aar/${project.name}-$libVersion-release.aar")
                 }
             }
         }
