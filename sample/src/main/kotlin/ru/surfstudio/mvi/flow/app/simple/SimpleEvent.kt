@@ -16,7 +16,7 @@
 package ru.surfstudio.mvi.flow.app.simple
 
 import ru.surfstudio.mvi.core.event.Event
-import ru.surfstudio.mvi.flow.app.request.RequestState
+import ru.surfstudio.mvi.flow.app.simple.request.RequestState
 
 sealed class SimpleEvent: Event {
 

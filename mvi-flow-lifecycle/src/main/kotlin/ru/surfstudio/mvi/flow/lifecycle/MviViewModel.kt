@@ -36,7 +36,7 @@ abstract class MviViewModel<S : Any, E : Event> : ViewModel(), FlowBinder {
     abstract val middleware: DslFlowMiddleware<E>
 
     /** Must be called in descendant class `init` */
-    fun init() {
+    fun bindFlow() {
         viewModelScope.bind(hub, middleware, state, reducer)
     }
 }

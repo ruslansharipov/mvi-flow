@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.surfstudio.mvi.flow.app.simple
+package ru.surfstudio.mvi.flow.app.handler
 
-import ru.surfstudio.mvi.flow.FlowEventHub
-import ru.surfstudio.mvi.flow.FlowState
-import ru.surfstudio.mvi.flow.lifecycle.MviViewModel
+import ru.surfstudio.mvi.core.event.Event
+import ru.surfstudio.mvi.mappers.Request
+import ru.surfstudio.mvi.mappers.RequestEvent
 
-class SimpleViewModel : MviViewModel<SimpleState, SimpleEvent>() {
+sealed class HandlerEvent : Event {
+    object StartLoading : HandlerEvent()
+    object OnBackPressed : HandlerEvent()
 
-    override val state: FlowState<SimpleState> = FlowState(SimpleState())
-    override val hub: FlowEventHub<SimpleEvent> = FlowEventHub()
-    override val middleware: SimpleMiddleware = SimpleMiddleware(state)
-    override val reducer: SimpleReducer = SimpleReducer()
-
-    init {
-        bindFlow()
-    }
+    data class LoadDataRequest(
+        override val request: Request<String>
+    ) : RequestEvent<String>, HandlerEvent()
 }

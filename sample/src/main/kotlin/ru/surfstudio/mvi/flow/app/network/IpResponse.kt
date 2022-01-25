@@ -13,20 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.surfstudio.mvi.flow.app.simple
+package ru.surfstudio.mvi.flow.app.network
 
-import ru.surfstudio.mvi.flow.FlowEventHub
-import ru.surfstudio.mvi.flow.FlowState
-import ru.surfstudio.mvi.flow.lifecycle.MviViewModel
+import kotlinx.serialization.Serializable
 
-class SimpleViewModel : MviViewModel<SimpleState, SimpleEvent>() {
-
-    override val state: FlowState<SimpleState> = FlowState(SimpleState())
-    override val hub: FlowEventHub<SimpleEvent> = FlowEventHub()
-    override val middleware: SimpleMiddleware = SimpleMiddleware(state)
-    override val reducer: SimpleReducer = SimpleReducer()
-
-    init {
-        bindFlow()
-    }
-}
+@Serializable
+data class IpResponse(
+    val country: String
+)

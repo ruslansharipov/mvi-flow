@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.surfstudio.mvi.flow.app.simple
+package ru.surfstudio.mvi.mappers.handler
 
-import ru.surfstudio.mvi.flow.FlowEventHub
-import ru.surfstudio.mvi.flow.FlowState
-import ru.surfstudio.mvi.flow.lifecycle.MviViewModel
+import ru.surfstudio.mvi.core.event.Event
+import ru.surfstudio.mvi.core.reducer.Reducer
 
-class SimpleViewModel : MviViewModel<SimpleState, SimpleEvent>() {
-
-    override val state: FlowState<SimpleState> = FlowState(SimpleState())
-    override val hub: FlowEventHub<SimpleEvent> = FlowEventHub()
-    override val middleware: SimpleMiddleware = SimpleMiddleware(state)
-    override val reducer: SimpleReducer = SimpleReducer()
-
-    init {
-        bindFlow()
-    }
+/** [Reducer] implementation which is able to handle errors */
+interface ErrorHandlerReducer<E : Event, State> : Reducer<E, State> {
+    val errorHandler: ErrorHandler
 }

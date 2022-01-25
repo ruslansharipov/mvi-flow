@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.surfstudio.mvi.flow.app.simple
+package ru.surfstudio.mvi.flow.app.handler
 
 import ru.surfstudio.mvi.flow.FlowEventHub
 import ru.surfstudio.mvi.flow.FlowState
-import ru.surfstudio.mvi.flow.lifecycle.MviViewModel
+import ru.surfstudio.mvi.flow.app.handler.error.ErrorHandlerImpl
+import ru.surfstudio.mvi.flow.app.network.IpNetworkCreator
+import ru.surfstudio.mvi.mappers.handler.MviErrorHandlerViewModel
 
-class SimpleViewModel : MviViewModel<SimpleState, SimpleEvent>() {
+class HandlerViewModel : MviErrorHandlerViewModel<HandlerState, HandlerEvent>() {
 
-    override val state: FlowState<SimpleState> = FlowState(SimpleState())
-    override val hub: FlowEventHub<SimpleEvent> = FlowEventHub()
-    override val middleware: SimpleMiddleware = SimpleMiddleware(state)
-    override val reducer: SimpleReducer = SimpleReducer()
+    override val state: FlowState<HandlerState> = FlowState(HandlerState())
+    override val hub: FlowEventHub<HandlerEvent> = FlowEventHub()
+    override val middleware: HandlerMiddleware =
+        HandlerMiddleware(IpNetworkCreator.repository)
+    override val reducer: HandlerReducer = HandlerReducer(ErrorHandlerImpl())
 
     init {
         bindFlow()
