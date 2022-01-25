@@ -215,7 +215,7 @@ open class EventTransformerList<E : Event>(
     /**
      * Filters events by a given [filterCondition].
      */
-    inline infix fun <reified T : Event> KClass<T>.filter(crossinline filterCondition: (T) -> Boolean): Flow<T> {
+    inline infix fun <reified T : Event> KClass<T>.filter(noinline filterCondition: (T) -> Boolean): Flow<T> {
         return eventStream.filterIsInstance<T>().filter(filterCondition)
     }
 
