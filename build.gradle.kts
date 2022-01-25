@@ -31,6 +31,7 @@ allprojects {
     // lib info
     val libVersion: String by project
     val libGroup: String by project
+    val artifactName = project.name
 
     extra["libraryConfig"] = {
         publishing {
@@ -38,8 +39,8 @@ allprojects {
                 register("aar", MavenPublication::class) {
                     version = libVersion
                     groupId = libGroup
-                    artifactId = name
-                    artifact("$buildDir/outputs/aar/${project.name}-$libVersion-release.aar")
+                    artifactId = artifactName
+                    artifact("$buildDir/outputs/aar/$artifactName-$libVersion-release.aar")
                 }
             }
         }
@@ -66,7 +67,7 @@ allprojects {
             defaultConfig {
                 minSdk = 23
                 targetSdk = 31
-                setProperty("archivesBaseName", "$name-$libVersion")
+                setProperty("archivesBaseName", "$artifactName-$libVersion")
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
