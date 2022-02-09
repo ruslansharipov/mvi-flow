@@ -33,6 +33,8 @@ class BusinessLogicComponent(
             .map { it as EventTest.TitleChanged }
             .subscribe(::updateTitle)
             .also(compositeDisposable::add)
+        // or
+        eventHub.addListener { event -> if (event is EventTest.TitleChanged) updateTitle(event) }
     }
 
     override fun shutdown() {
