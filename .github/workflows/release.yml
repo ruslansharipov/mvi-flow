@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release lib version'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Write libVersion based on input version name to gradle.properties
+        uses: christian-draeger/write-properties@1.0.1
+        with:
+          path: './gradle.properties'
+          property: 'libVersion'
+          value: ${{ github.event.inputs.version }}
+
+      - name: Build with Gradle
+        run: ./gradlew clean assembleRelease
+
+      - name: Run unit tests
+        run: ./gradlew testReleaseUnitTest
+
+      - name: Publish artifact
+        env:
+          surf_maven_username: ${{ secrets.SURF_MAVEN_USERNAME }}
+          surf_maven_password: ${{ secrets.SURF_MAVEN_PASSWORD }}
+        run: ./gradlew artifactoryPublish
+
+      - name: Commit Version
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Released version ${{ github.event.inputs.version }} [skip ci] [version]
+          branch: master
+          file_pattern: gradle.properties
